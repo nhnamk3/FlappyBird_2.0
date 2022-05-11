@@ -24,10 +24,3 @@ void TextObject::Render(SDL_Renderer* des)
 	rect_.h = textH;
 	SDL_RenderCopy(des, p_object_, NULL, &rect_);
 }
-//void TextObject::SetRect(int x, int y, int w, int h)
-//{
-//	rect_.x = x;
-//	rect_.y = y;
-//	rect_.h = h;
-//	rect_.w = w;
-//}

@@ -5,7 +5,6 @@ PipeDouble::PipeDouble()
 	p_pipe_top = new Pipe;
 	p_pipe_bot = new Pipe;
 	velocity_ = 150;
-	time_ = 0;
 }
 PipeDouble::~PipeDouble()
 {
@@ -22,7 +21,6 @@ Pipe* PipeDouble::GetPipeBot()
 }
 void PipeDouble::HandleMove(const int& x_size)
 {
-	time_ += deltaTime;
 	SDL_Rect rect_top = p_pipe_top->GetRect();
 	SDL_Rect rect_bot = p_pipe_bot->GetRect();
 	int x = rect_top.x;
@@ -30,16 +28,14 @@ void PipeDouble::HandleMove(const int& x_size)
 	int h = rect_top.h;
 	int y_top = rect_top.y;
 	int y_bot = rect_bot.y;
-	double limitTime = static_cast<double>((x_size + PIPE_WIDTH)) / velocity_;
-	if (time_ > limitTime) {
+	if (x <= -PIPE_WIDTH) {	
 		x = x_size;
-		time_ = 0;
-		int ranNum = GetRand(0, 250);
+		int ranNum = GetRand(50, 250);
 		p_pipe_top->SetRect(x_size, -ranNum);
 		p_pipe_bot->SetRect(x_size, -ranNum + PIPE_DISTANCE + PIPE_HEIGHT);
 	}
 	else {
-		x = x_size - velocity_ * time_;
+		x -= velocity_ * deltaTime ;
 		p_pipe_top->SetRect(x, y_top);
 		p_pipe_bot->SetRect(x, y_bot);
 	}

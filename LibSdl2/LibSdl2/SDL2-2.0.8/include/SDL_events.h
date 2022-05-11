@@ -245,7 +245,7 @@ typedef struct SDL_MouseMotionEvent
 /**
  *  \brief Mouse button event structure (event.button.*)
  */
-typedef struct SDL_MouseButtonEvent
+typedef struct 
 {
     Uint32 type;        /**< ::SDL_MOUSEBUTTONDOWN or ::SDL_MOUSEBUTTONUP */
     Uint32 timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */

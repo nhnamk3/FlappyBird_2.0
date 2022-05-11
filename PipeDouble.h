@@ -14,5 +14,4 @@ private:
 	Pipe* p_pipe_top;
 	Pipe* p_pipe_bot;
 	int velocity_;
-	double time_;
 };

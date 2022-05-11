@@ -17,7 +17,7 @@ void Bird::HandleGravity()
 	y += velY_ + 0.6;
 	velY_ += 0.5;
 	angle_ = (velY_ / 2) * 10 - 5;
-	if (y <= -BIRD_HEIGHT)	y = -BIRD_HEIGHT;
+	if (y <= 0)	y = 0;
 	this->SetRect(rect_.x, y);
 }
 void Bird::HandleFly(Mix_Chunk* fly_sound)
@@ -36,7 +36,7 @@ bool Bird::IsFellGround()
 void Bird::Flapping(SDL_Renderer* des)
 {
 	timeFrame_ += deltaTime;
-	if (timeFrame_ == 3 * deltaTime) {
+	if (timeFrame_ >= 3 * deltaTime) {
 		frame_++;
 		if (frame_ > 2)	frame_ = 0;
 		timeFrame_ = 0;
@@ -48,4 +48,13 @@ void Bird::Render(SDL_Renderer* des)
 {
 	SDL_Rect renderquad = { rect_.x, rect_.y, rect_.w, rect_.h };
 	SDL_RenderCopyEx(des, p_object_, NULL, &renderquad, angle_, NULL, SDL_FLIP_NONE);
+}
+void Bird::Die(SDL_Renderer* des, Mix_Chunk* p_sound_die)
+{
+	this->HandleGravity();
+	Mix_PlayChannel(1, p_sound_die, 0);
+}
+void Bird::SetAngle(int angle)
+{
+	angle_ = angle;
 }

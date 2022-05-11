@@ -150,12 +150,11 @@
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="ButtonObject.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Medal.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipeDouble.cpp" />
+    <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="TextObject.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,13 +163,15 @@
     <ClInclude Include="Bird.h" />
     <ClInclude Include="ConstSrc.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Ground.h" />
     <ClInclude Include="ButtonObject.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Medal.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipeDouble.h" />
+    <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="TextObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="HighScore.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

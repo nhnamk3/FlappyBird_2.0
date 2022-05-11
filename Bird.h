@@ -11,7 +11,8 @@ public:
 	bool IsFellGround();
 	void Flapping(SDL_Renderer* des);
 	void Render(SDL_Renderer* des);
-	//bool Die()
+	void Die(SDL_Renderer* des, Mix_Chunk* p_sound_die);
+	void SetAngle(int angle);
 private:
 	float velY_;
 	std::string pathBird[3] = { "flappy-bird-assets//sprites//bluebird-upflap.png",

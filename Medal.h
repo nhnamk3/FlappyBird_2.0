@@ -1,10 +1,9 @@
 #pragma once
 #include "BaseObject.h"
-class Mouse : public BaseObject
+class Medal : public BaseObject
 {
 public:
-	Mouse();
-	~Mouse();
+	Medal();
+	~Medal();
 private:
-
 };
