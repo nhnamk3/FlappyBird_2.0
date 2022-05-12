@@ -7,7 +7,7 @@ void Button::Update()
 {}
 void Button::Handle()
 {}
-bool Button::Selected(SDL_Event* e)
+bool Button::Selected(SDL_Event* e, Mix_Chunk* sound)
 {
 	selected_ = false;
 	SDL_PollEvent(e);
@@ -17,6 +17,7 @@ bool Button::Selected(SDL_Event* e)
 		if (x >= rect_.x && x <= (rect_.x + rect_.w) && y >= rect_.y && y <= (rect_.y + rect_.h)) {
 			selected_ = true;
 			bl = !bl;
+			Mix_PlayChannel(1, sound, 0);
 		}
 	}
 	return selected_;

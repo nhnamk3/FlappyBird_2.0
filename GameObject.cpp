@@ -128,7 +128,8 @@ bool Game::InitGame()
 	sound[HIT] = Mix_LoadWAV("flappy-bird-assets//audio//hit.wav");
 	sound[DIE] = Mix_LoadWAV("flappy-bird-assets//audio//die.wav");
 	sound[WING] = Mix_LoadWAV("flappy-bird-assets//audio//wing.wav");
-	if (!sound[DIE] || !sound[WING] || !sound[POINT] || !sound[HIT])     return false;
+	sound[CLICK] = Mix_LoadWAV("flappy-bird-assets//audio//click.wav");
+	if (!sound[DIE] || !sound[WING] || !sound[POINT] || !sound[HIT] || !sound[CLICK])     return false;
 	music_bg = Mix_LoadMUS("flappy-bird-assets//audio//music_bg.mp3");
 	if (!music_bg)	return false;
 	Mix_PlayMusic(music_bg, -1);
@@ -216,15 +217,15 @@ void Game::HandleEvent()
 {
 	SDL_PollEvent(events);
 	if (status_ == menu) {
-		if (button[PLAY].Selected(events)) {
+		if (button[PLAY].Selected(events, sound[CLICK])) {
 			status_ = newGame;
 			events->type = NULL;
 		}
-		if (button[QUIT].Selected(events)) {
+		if (button[QUIT].Selected(events, sound[CLICK])) {
 			status_ = quit;
 			events->type = NULL;
 		}
-		if (button[MUSIC].Selected(events)) {
+		if (button[MUSIC].Selected(events, sound[CLICK])) {
 			events->type = NULL;
 			isMusic = !isMusic;
 		}
@@ -237,11 +238,11 @@ void Game::HandleEvent()
 		events->type = NULL;
 	}
 	if (status_ == die) {
-		if (button[OK].Selected(events)) {
+		if (button[OK].Selected(events, sound[CLICK])) {
 			status_ = newGame;
 			events->type = NULL;
 		}
-		if (button[MENU].Selected(events)) {
+		if (button[MENU].Selected(events, sound[CLICK])) {
 			status_ = menu;
 		}
 	}

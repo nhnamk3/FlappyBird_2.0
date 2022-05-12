@@ -21,7 +21,7 @@ public:
 		PLAY, OPTION, QUIT, MUSIC, OK, MENU
 	};
 	enum Sound_Name {
-		WING, POINT, HIT, DIE
+		WING, POINT, HIT, DIE, CLICK
 	};
 	enum Text_Name {
 		CURRENT_SC, RECENT_SC, HIGH_SC
@@ -53,7 +53,7 @@ private:
 	Button* button = new Button[6];
 	SDL_Window* p_window = NULL;
 	SDL_Renderer* p_screen = NULL;
-	Mix_Chunk** sound = new Mix_Chunk*[4];
+	Mix_Chunk** sound = new Mix_Chunk*[5];
 	Mix_Music* music_bg = NULL;
 	TTF_Font* p_font1 = NULL;
 	TTF_Font* p_font2 = NULL;

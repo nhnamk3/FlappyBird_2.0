@@ -7,7 +7,7 @@ public:
 	~Button();
 	void Update();
 	void Handle();
-	bool Selected(SDL_Event* e);
+	bool Selected(SDL_Event* e, Mix_Chunk* sound);
 	void RenderButton(SDL_Renderer* des);
 	void LoadPath(const std::string& FileName);
 	bool IsLoadImg(SDL_Renderer* des);
