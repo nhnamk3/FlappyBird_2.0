@@ -24,7 +24,7 @@
     <ClCompile Include="Bird.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BackGround.cpp">
+    <ClCompile Include="PicObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Pipe.cpp">
@@ -42,10 +42,10 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreBoard.cpp">
+    <ClCompile Include="Medal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Medal.cpp">
+    <ClCompile Include="Tutorial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +56,7 @@
     <ClInclude Include="Bird.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h">
+    <ClInclude Include="PicObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConstSrc.h">
@@ -77,10 +77,10 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreBoard.h">
+    <ClInclude Include="Medal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Medal.h">
+    <ClInclude Include="Tutorial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

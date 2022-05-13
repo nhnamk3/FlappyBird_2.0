@@ -145,7 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="PicObject.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="ButtonObject.cpp" />
@@ -154,11 +154,11 @@
     <ClCompile Include="Medal.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipeDouble.cpp" />
-    <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="TextObject.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="PicObject.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Bird.h" />
     <ClInclude Include="ConstSrc.h" />
@@ -167,8 +167,8 @@
     <ClInclude Include="Medal.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipeDouble.h" />
-    <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="TextObject.h" />
+    <ClInclude Include="Tutorial.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="HighScore.txt" />
