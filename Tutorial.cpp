@@ -7,12 +7,15 @@ Tutor::Tutor() {
 	}
 	mouse[MOUSE_RIGHT]->SetRect(35, SCREEN_HEIGHT / 2 - 5);
 	mouse[MOUSE_LEFT]->SetRect(130, SCREEN_HEIGHT / 2 - 5);
-	p_text->SetColor({ 255, 0, 0, 255 });
-	p_text->SetRect(10, SCREEN_HEIGHT / 2 + 20);
-	p_text->SetText("CLICK       OR      TO FLY");
+	p_text[TEXT_TUR].SetColor({ 255, 0, 0, 255 });
+	p_text[TEXT_ESC].SetColor({ 250, 0, 0, 255 });
+	p_text[TEXT_TUR].SetRect(10, SCREEN_HEIGHT / 2 + 20);
+	p_text[TEXT_ESC].SetRect(10, SCREEN_HEIGHT / 2 + 50);
+	p_text[TEXT_TUR].SetText("CLICK       OR      TO FLY");
+	p_text[TEXT_ESC].SetText("   PRESS ESC TO CONTINUE  ");
 }
 Tutor::~Tutor() {
-	if (!p_text)	delete p_text;
+	if (!p_text)	delete[] p_text;
 	for (int i = 0; i < 3; i++) {
 		if (!mouse[i])	delete[] mouse[i];
 	}
@@ -21,9 +24,11 @@ Tutor::~Tutor() {
 void Tutor::Render(TTF_Font* font, SDL_Renderer* des)
 {
 	timeFrame_ += deltaTime;
-	p_text->LoadText(font, des);
-	p_text->Render(des);
-	if (timeFrame_ >= 30 * deltaTime) {
+	p_text[TEXT_TUR].LoadText(font, des);
+	p_text[TEXT_TUR].Render(des);
+	p_text[TEXT_ESC].LoadText(font, des);
+	p_text[TEXT_ESC].Render(des);
+	if (timeFrame_ >= 20 * deltaTime) {
 		frame_++;
 		if (frame_ > 1)	frame_ = 0;
 		timeFrame_ = 0;

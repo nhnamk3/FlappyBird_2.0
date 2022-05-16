@@ -7,24 +7,24 @@ Game::Game()
 }
 Game::~Game()
 {
-	if (!p_backGround)			delete p_backGround;
+	if (!p_backGround)	delete p_backGround;
+	if (!p_scoreBoard)	delete p_scoreBoard;
+	if (!p_menu_bg)		delete p_menu_bg;
+	if (!p_tutor)		delete p_tutor;
 	if (!p_bird)		delete p_bird;
 	if (!p_pipe)		delete p_pipe;
+	if (!events)		delete events;
 	if (!p_window)		SDL_DestroyWindow(p_window);
 	if (!p_screen)		SDL_DestroyRenderer(p_screen);
-	if (!p_menu_bg)		delete p_menu_bg;
-	if (!events)		delete events;
 	if (!music_bg)		Mix_FreeMusic(music_bg);
-	if (!p_scoreBoard)			delete p_scoreBoard;
 	if (!text)			delete[] text;
 	if (!button)		delete[] button;
 	if (!medal)			delete[] medal;
-	if (!p_tutor)		delete p_tutor;
-	for (int i = 0; i < NUM_SOUND; i++) {
-		if (!sound[i])	Mix_FreeChunk(sound[i]);
-	}
 	for (int i = 0; i < NUM_FONT; i++) {
 		if (!font[i])	TTF_CloseFont(font[i]);
+	}
+	for (int i = 0; i < NUM_SOUND; i++) {
+		if (!sound[i])	Mix_FreeChunk(sound[i]);
 	}
 	SDL_Quit();
 }
@@ -63,42 +63,53 @@ bool Game::InitGame()
 	isPlayChanel = true;
 	if (rand() % 2) {
 		if (!p_backGround->LoadImg("flappy-bird-assets//sprites//background-day.png", p_screen))		return false;
-	}
-	else {
+	}else {
 		if (!p_backGround->LoadImg("flappy-bird-assets//sprites//background-night.png", p_screen))		return false;
 	}
-	if (!p_scoreBoard->LoadImg("flappy-bird-assets//sprites//score_board.png", p_screen))			return false;
-	if (!p_bird->LoadImg("flappy-bird-assets//sprites//bluebird-midflap.png", p_screen))	return false;
-	if (!p_menu_bg->LoadImg("flappy-bird-assets//sprites//menu_bg.png", p_screen))			return false;
+	if (!p_scoreBoard->LoadImg("flappy-bird-assets//sprites//score_board.png", p_screen))				return false;
+	if (!p_bird->LoadImg("flappy-bird-assets//sprites//bluebird-midflap.png", p_screen))				return false;
+	if (!p_menu_bg->LoadImg("flappy-bird-assets//sprites//menu_bg.png", p_screen))						return false;	
 
 	p_backGround->SetRect(0, 0);
 	p_scoreBoard->SetRect(0, 0);
 	p_bird->SetRect(BIRD_RECT_X_DEFAUT, SCREEN_HEIGHT / 2);
 	p_menu_bg->SetRect(0, 0);
 	p_bird->SetAngle(0);
+
+	font[fCURRENT_SC] = TTF_OpenFont("flappy-bird-assets//text//FFFFORWA.ttf", 24);
+	font[fFINAL_SC] = TTF_OpenFont("flappy-bird-assets//text//MinecraftTen-VGORe.ttf", 24);
+	font[fTUTOR] = TTF_OpenFont("flappy-bird-assets//text//Tutorial_text.ttf", 24);
+	font[fMESS] = TTF_OpenFont("flappy-bird-assets//text//MinecraftTen-VGORe.ttf", 32);
+	if (!font[fCURRENT_SC] || !font[fFINAL_SC] || !font[fTUTOR] || !font[fMESS])	return false;
+
 	text[tCURRENT_SC].SetRect(SCREEN_WIDTH / 2, 30);
 	text[tFINAL_SC].SetRect(206, 165);
 	text[tHIGH_SC].SetRect(206, 210);
+	text[tMess].SetRect(40, 160);
 
-	SDL_Color color = { 255, 255, 255, 255 };
-	text[tCURRENT_SC].SetColor(color);
-	text[tFINAL_SC].SetColor(color);
-	text[tHIGH_SC].SetColor(color);
+	SDL_Color white_color = { 255, 255, 255, 255 };
+	SDL_Color green_color = { 0, 155, 0, 255 };
+	text[tCURRENT_SC].SetColor(white_color);
+	text[tFINAL_SC].SetColor(white_color);
+	text[tHIGH_SC].SetColor(white_color);
+	text[tMess].SetColor(green_color);
+	text[tMess].SetText("COMING SOON");
+	text[tMess].LoadText(font[fMESS], p_screen);
 
 	for (int i = 0; i < PIPE_NUM; i++) {
 		int ranNum = p_pipe->GetRand(50,250);
 		Pipe* p_top = (p_pipe + i)->GetPipeTop();
 		Pipe* p_bot = (p_pipe + i)->GetPipeBot();
-		if (!p_top->LoadImg("flappy-bird-assets//sprites//pipe-green-top.png", p_screen))	return false;
-		if (!p_bot->LoadImg("flappy-bird-assets//sprites//pipe-green-bot.png", p_screen))	return false;
+		if (!p_top->LoadImg("flappy-bird-assets//sprites//pipe-green-top.png", p_screen))			return false;
+		if (!p_bot->LoadImg("flappy-bird-assets//sprites//pipe-green-bot.png", p_screen))			return false;
 		p_top->SetRect(SCREEN_WIDTH + 200, -ranNum);
 		p_bot->SetRect(SCREEN_WIDTH + 200, -ranNum + PIPE_DISTANCE + PIPE_HEIGHT);
 	}
 
-	if (!medal[mNO].LoadImg("flappy-bird-assets//sprites//no_medal.png", p_screen))			return false;
-	if (!medal[mBRONZE].LoadImg("flappy-bird-assets//sprites//bronze_medal.png", p_screen))	return false;
-	if (!medal[mSILVER].LoadImg("flappy-bird-assets//sprites//siliver_medal.png", p_screen))	return false;
-	if (!medal[mGOLD].LoadImg("flappy-bird-assets//sprites//gold_medal.png", p_screen))		return false;
+	if (!medal[mNO].LoadImg("flappy-bird-assets//sprites//no_medal.png", p_screen))					return false;
+	if (!medal[mBRONZE].LoadImg("flappy-bird-assets//sprites//bronze_medal.png", p_screen))			return false;
+	if (!medal[mSILVER].LoadImg("flappy-bird-assets//sprites//siliver_medal.png", p_screen))		return false;
+	if (!medal[mGOLD].LoadImg("flappy-bird-assets//sprites//gold_medal.png", p_screen))				return false;
 
 	medal[mNO].SetRect(58, 178);
 	medal[mBRONZE].SetRect(58, 178);
@@ -116,10 +127,10 @@ bool Game::InitGame()
 	if (!button[bPLAY].IsLoadImg(p_screen))		return false;
 	if (!button[bOPTION].IsLoadImg(p_screen))	return false;
 	if (!button[bQUIT].IsLoadImg(p_screen))		return false;
-	if (!button[bMUSIC].IsLoadImg(p_screen))		return false;
+	if (!button[bMUSIC].IsLoadImg(p_screen))	return false;
 	if (!button[bOK].IsLoadImg(p_screen))		return false;
 	if (!button[bMENU].IsLoadImg(p_screen))		return false;
-	if (!button[bTUTOR].IsLoadImg(p_screen))		return false;
+	if (!button[bTUTOR].IsLoadImg(p_screen))	return false;
 
 	button[bPLAY].SetRect(94, 200);
 	button[bOPTION].SetRect(94, 265);
@@ -139,14 +150,10 @@ bool Game::InitGame()
 	if (!music_bg)	return false;
 	Mix_PlayMusic(music_bg, -1);
 
-	font[fCURRENT_SC] = TTF_OpenFont("flappy-bird-assets//text//FFFFORWA.ttf", 24);
-	font[fFINAL_SC] = TTF_OpenFont("flappy-bird-assets//text//MinecraftTen-VGORe.ttf", 24);
-	font[fTUTOR] = TTF_OpenFont("flappy-bird-assets//text//Tutorial_text.ttf", 24);
-	if (!font[fCURRENT_SC] || !font[fFINAL_SC] || !font[fTUTOR])	return false;
 	return true;
 }
 void Game::Render()
-{
+{ 
 	if (status_ == newGame) {
 		this->InitGame();
 		status_ = playing;
@@ -167,6 +174,15 @@ void Game::Render()
 		button[bQUIT].RenderButton(p_screen);
 		button[bMUSIC].RenderButton(p_screen);
 		button[bTUTOR].RenderButton(p_screen);
+		if (showMess) {
+			time += deltaTime;
+			text[tMess].Render(p_screen);
+			if (time >= 40 * deltaTime) {
+				events->type = NULL;
+				time = 0;
+				showMess = false;
+			}
+		}
 	}
 	if (status_ == playing || status_ == colision) {
 		SDL_SetRenderDrawColor(p_screen, 255, 255, 255, 255);
@@ -247,6 +263,10 @@ void Game::HandleEvent()
 			status_ = tutor;
 			events->type = NULL;
 		}
+		if (button[bOPTION].Selected(events, sound[sCLICK])) {
+			showMess = true; 
+			events->type = NULL;
+		}
 	}
 	if (status_ == playing) {
 		if (events->type == SDL_MOUSEBUTTONDOWN) {
@@ -262,11 +282,11 @@ void Game::HandleEvent()
 		}
 		if (button[bMENU].Selected(events, sound[sCLICK])) {
 			status_ = menu;
+			events->type = NULL;
 		}
 	}
 	if (status_ == tutor) {
-		if (events->type == SDL_MOUSEBUTTONDOWN) {
-			events->type = NULL;
+		if (events->key.keysym.sym == SDLK_ESCAPE) {
 			status_ = menu;
 		}
 	}
