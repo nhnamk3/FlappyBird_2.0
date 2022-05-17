@@ -55,12 +55,6 @@ bool Game::InitSDL()
 }
 bool Game::InitGame()
 {
-	g_score = 0;
-	start = false;
-	renderBG = false;
-	isMusic = true;
-	isChunk = false;
-	isPlayChanel = true;
 	if (rand() % 2) {
 		if (!p_backGround->LoadImg("flappy-bird-assets//sprites//background-day.png", p_screen))		return false;
 	}else {
@@ -154,20 +148,35 @@ bool Game::InitGame()
 }
 void Game::Render()
 { 
+	if (isMusic) {
+		Mix_VolumeMusic(40);
+		Mix_VolumeChunk(sound[sCLICK], 20);
+		Mix_VolumeChunk(sound[sWING], 10);
+		Mix_VolumeChunk(sound[sDIE], 10);
+		Mix_VolumeChunk(sound[sPOINT], 10);
+		Mix_VolumeChunk(sound[sHIT], 10);
+	}
+	else {
+		Mix_VolumeMusic(0);
+		Mix_VolumeChunk(sound[sCLICK], 0);
+		Mix_VolumeChunk(sound[sWING], 0);
+		Mix_VolumeChunk(sound[sDIE], 0);
+		Mix_VolumeChunk(sound[sPOINT], 0);
+		Mix_VolumeChunk(sound[sHIT], 0);
+	}
 	if (status_ == newGame) {
 		this->InitGame();
+		g_score = 0;
+		start = false;
+		renderBG = false;
+		isChunk = false;
+		isPlayChanel = true;
 		status_ = playing;
 	}
 	if (status_ == menu) {
 		SDL_SetRenderDrawColor(p_screen, 255, 255, 255, 255);
 		SDL_RenderClear(p_screen);
 		p_menu_bg->Render(p_screen);
-		if (isMusic) {
-			Mix_VolumeMusic(40);
-		}
-		else {
-			Mix_VolumeMusic(0);
-		}
 		renderBG = true;
 		button[bPLAY].RenderButton(p_screen);
 		button[bOPTION].RenderButton(p_screen);
