@@ -2,8 +2,10 @@
 
 ## Hướng dẫn cài đặt:
 
-- [ ]  Mở terminal gõ: `git clone [https://github.com/nhnamk3/FlappyBird_2.0.git](https://github.com/nhnamk3/FlappyBird_2.0.git)`
-- [ ]  
+- [ ]  Cài VS2019 tại link: [VS2019](https://taimienphi.vn/download-visual-studio-2019-76908/taive)
+- [ ]  Tải file lại link: [FlappyBird](https://drive.google.com/file/d/1LGUxErRpJ8iItXqhav8Hy2D02s0ahmLR/view?usp=sharing)
+- [ ]  Chạy file FlappyBird_2.0.sln bằng VS2019
+- [ ]  Ấn build ở chế độ Debug x86
 
 ## Mô tả chung về trò chơi:
 
@@ -45,8 +47,6 @@ Trò chơi được lấy ý tưởng từ trò FlappyBird của Nguyễn Hà Đ
     - Biết sử dụng kết thừa của hướng đối tượng làm code mạch lạc, dễ hiểu hơn.
     - Đặt tên biến có quy tắc làm đọc code dễ hiểu, dễ kiểm soát code hơn.
 
-Link GitHub: 
+Link GitHub: [Git](https://github.com/nhnamk3/FlappyBird_2.0.git)
 
-[https://github.com/nhnamk3/FlappyBird_2.0.git](https://github.com/nhnamk3/FlappyBird_2.0.git)
-
-Link Youtube: [Flappy Bird game coded by nhnamk3 using SDL2 - YouTube](https://youtu.be/ZanvzjeVsCQ)
+Link Youtube: [DemoGame](https://www.youtube.com/watch?v=ZanvzjeVsCQ)
